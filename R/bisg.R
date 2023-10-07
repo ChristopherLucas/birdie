@@ -115,11 +115,15 @@ bisg <- function(formula, data=NULL, p_r=p_r_natl(), p_rgx=NULL, p_rs=NULL,
 #' @concept bisg
 #' @export
 bisg_me <- function(formula, data=NULL, p_r=p_r_natl(), p_rgx=NULL, p_rs=NULL,
-                    iter=1000, warmup=100, cores=1L) {
+                    iter=1000, warmup=100, cores=1L, lgx_only=NULL) {
     vars = parse_bisg_form(formula, data)
 
     l_name = make_name_tbl_vec(vars, p_r, p_rs, TRUE)
     l_gx = make_gx_tbl_vec(vars, p_r, p_rgx)
+
+    if(lgx_only==TRUE){
+        return(l_gx)
+    }
 
     # set up sampler vectors
     n_gx = nrow(l_gx$p_rgx)
